@@ -1,75 +1,76 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
+import { useTranslation } from "@/lib/translations"
+import { useEffect } from "react"
+import { useParams, useSearchParams } from "next/navigation"
 
 // Sample video data - in a real app, this would come from an API
 const sampleVideos = [
   {
     id: "1",
-    title: "Introduction to Mathematics",
-    description:
-      "This video introduces basic mathematical concepts that form the foundation of higher mathematics. Perfect for beginners and those looking to refresh their knowledge.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video1",
+    descriptionKey: "video1Description", // You'll need to add these to translations
+    thumbnail: "/abstract-math-concepts.png",
     duration: "12:34",
-    category: "Mathematics",
+    categoryKey: "mathematics",
   },
   {
     id: "2",
-    title: "Basic Physics Concepts",
-    description:
-      "Learn about the fundamental concepts in physics including motion, energy, and forces. This video provides a clear explanation with visual examples.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video2",
+    descriptionKey: "video2Description",
+    thumbnail: "/placeholder.svg?key=pb7pf",
     duration: "15:21",
-    category: "Physics",
+    categoryKey: "physics",
   },
   {
     id: "3",
-    title: "World History: Ancient Civilizations",
-    description:
-      "Explore the fascinating world of ancient civilizations, their cultures, achievements, and lasting impact on our modern world.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video3",
+    descriptionKey: "video3Description",
+    thumbnail: "/ancient-civilizations-classroom.png",
     duration: "18:45",
-    category: "History",
+    categoryKey: "history",
   },
   {
     id: "4",
-    title: "Introduction to Biology",
-    description:
-      "Discover the science of life in this introductory video that covers cells, genetics, evolution, and the diversity of living organisms.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video4",
+    descriptionKey: "video4Description",
+    thumbnail: "/diverse-biology-classroom.png",
     duration: "14:22",
-    category: "Biology",
+    categoryKey: "biology",
   },
   {
     id: "5",
-    title: "Chemistry Fundamentals",
-    description:
-      "This video covers the basic principles of chemistry, including atoms, elements, compounds, and chemical reactions.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video5",
+    descriptionKey: "video5Description",
+    thumbnail: "/placeholder.svg?key=qke9p",
     duration: "16:08",
-    category: "Chemistry",
+    categoryKey: "chemistry",
   },
   {
     id: "6",
-    title: "Learning English Grammar",
-    description:
-      "A comprehensive guide to English grammar rules and usage, designed for non-native speakers who want to improve their language skills.",
-    thumbnail: "/placeholder.svg?height=180&width=320",
+    titleKey: "video6",
+    descriptionKey: "video6Description",
+    thumbnail: "/placeholder.svg?height=180&width=320&query=english class",
     duration: "11:52",
-    category: "Languages",
+    categoryKey: "languages",
   },
 ]
 
-export default function VideoPage({
-  params,
-  searchParams,
-}: {
-  params: { id: string }
-  searchParams: { lang?: string }
-}) {
-  const { id } = params
-  const lang = searchParams.lang || "en"
+export default function VideoPage() {
+  const params = useParams()
+  const searchParams = useSearchParams()
+  const id = params.id as string
+  const lang = searchParams.get("lang") || "en"
+  const { setLanguage, t } = useTranslation()
+
+  useEffect(() => {
+    // Update the language based on URL parameter
+    setLanguage(lang)
+  }, [lang, setLanguage])
 
   // Find the video by ID
   const video = sampleVideos.find((v) => v.id === id) || sampleVideos[0]
@@ -80,19 +81,24 @@ export default function VideoPage({
       <main className="flex-1 container mx-auto py-8 px-4">
         <Link
           href={`/catalog?lang=${lang}`}
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
         >
           <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to catalog
+          {t("backToCatalog")}
         </Link>
 
         <div className="grid gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
-            <div className="relative aspect-video bg-muted rounded-lg overflow-hidden mb-4">
+            <div className="relative aspect-video bg-muted rounded-lg overflow-hidden mb-6 shadow-lg">
               {/* This would be a video player in a real app */}
-              <Image src={video.thumbnail || "/placeholder.svg"} alt={video.title} fill className="object-cover" />
+              <Image
+                src={video.thumbnail || "/placeholder.svg"}
+                alt={t(video.titleKey)}
+                fill
+                className="object-cover"
+              />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="rounded-full bg-teal-600/90 p-4">
+                <div className="rounded-full bg-primary/90 p-4 shadow-md hover:bg-primary transition-colors cursor-pointer">
                   <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       strokeLinecap="round"
@@ -111,16 +117,22 @@ export default function VideoPage({
               </div>
             </div>
 
-            <h1 className="text-2xl font-medium mb-2">{video.title}</h1>
-            <p className="text-muted-foreground mb-4">
-              {video.category} • {video.duration}
+            <h1 className="text-3xl font-heading font-medium mb-4">{t(video.titleKey)}</h1>
+            <div className="flex items-center text-muted-foreground mb-6 text-sm">
+              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">{t(video.categoryKey)}</span>
+              <span className="mx-2">•</span>
+              <span>
+                {t("duration")}: {video.duration}
+              </span>
+            </div>
+            <p className="text-md leading-relaxed">
+              {video.descriptionKey ? t(video.descriptionKey) : "No description available"}
             </p>
-            <p className="text-sm">{video.description}</p>
           </div>
 
-          <div>
-            <h2 className="text-lg font-medium mb-4">Related Videos</h2>
-            <div className="space-y-4">
+          <div className="bg-muted/20 p-6 rounded-xl">
+            <h2 className="text-xl font-medium mb-6 border-b pb-2">{t("relatedVideos")}</h2>
+            <div className="space-y-5">
               {sampleVideos
                 .filter((v) => v.id !== id)
                 .slice(0, 3)
@@ -128,22 +140,22 @@ export default function VideoPage({
                   <Link
                     key={relatedVideo.id}
                     href={`/video/${relatedVideo.id}?lang=${lang}`}
-                    className="flex gap-3 group"
+                    className="flex gap-4 group hover:bg-muted/30 p-2 rounded-lg transition-colors"
                   >
-                    <div className="relative w-24 h-16 flex-shrink-0 rounded overflow-hidden">
+                    <div className="relative w-28 h-16 flex-shrink-0 rounded-md overflow-hidden">
                       <Image
                         src={relatedVideo.thumbnail || "/placeholder.svg"}
-                        alt={relatedVideo.title}
+                        alt={t(relatedVideo.titleKey)}
                         fill
                         className="object-cover"
                       />
                     </div>
                     <div>
-                      <h3 className="text-sm font-medium group-hover:text-teal-600 line-clamp-2">
-                        {relatedVideo.title}
+                      <h3 className="text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">
+                        {t(relatedVideo.titleKey)}
                       </h3>
                       <p className="text-xs text-muted-foreground mt-1">
-                        {relatedVideo.category} • {relatedVideo.duration}
+                        {t(relatedVideo.categoryKey)} • {relatedVideo.duration}
                       </p>
                     </div>
                   </Link>

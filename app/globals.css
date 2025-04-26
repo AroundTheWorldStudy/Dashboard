@@ -10,7 +10,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 180 70% 35%;
+    --primary: 196 100% 40%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -22,8 +22,9 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 180 70% 35%;
+    --ring: 196 100% 40%;
     --radius: 0.5rem;
+    --primary-900: 196 100% 25%;
   }
 
   .dark {
@@ -33,7 +34,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 180 70% 45%;
+    --primary: 196 100% 50%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -45,7 +46,8 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 180 70% 45%;
+    --ring: 196 100% 50%;
+    --primary-900: 196 100% 65%;
   }
 }
 
@@ -55,6 +57,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .font-heading {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
   }
 }
 
@@ -71,4 +76,45 @@
 
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Font display optimizations */
+@font-face {
+  font-family: var(--font-montserrat);
+  font-display: block;
+}
+
+/* Prevent text flickering */
+.font-heading {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

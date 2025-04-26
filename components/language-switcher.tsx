@@ -1,8 +1,10 @@
 "use client"
+
 import { useRouter } from "next/navigation"
 import { Check, ChevronDown, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useTranslation } from "@/lib/translations"
 
 const languages = [
   { value: "en", label: "English" },
@@ -19,9 +21,11 @@ const languages = [
 
 export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
   const router = useRouter()
+  const { setLanguage } = useTranslation()
   const currentLanguage = languages.find((lang) => lang.value === currentLang) || languages[0]
 
   const handleSelectLanguage = (value: string) => {
+    setLanguage(value)
     router.push(`/catalog?lang=${value}`)
   }
 
