@@ -20,11 +20,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
+          cache: 'pnpm' 
 
-      - run: npm ci
-      - run: npx prisma generate
-      - run: npm run build
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm dlx prisma generate
+      - run: pnpm run build
 
       - name: Azure Login
         uses: azure/login@v2

@@ -27,7 +27,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "ShehzadMohammed/*": ["./src/*"]
+      "~/*": ["./src/*"]
     }
   },
   "include": [
