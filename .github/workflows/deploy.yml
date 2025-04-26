@@ -24,7 +24,6 @@ jobs:
 
       # Install dependencies and build
       - run: pnpm install --frozen-lockfile
-      - run: pnpm dlx prisma generate
       - run: pnpm run build
 
       # Authenticate to Azure
