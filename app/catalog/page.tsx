@@ -1,11 +1,10 @@
 import { VideoGrid } from "@/components/video-grid"
 import { Navbar } from "@/components/navbar"
-
 export default function CatalogPage({
   searchParams,
 }: {
   searchParams: { lang?: string }
-}) {
+}) { 
   const lang = searchParams.lang || "en"
 
   return (
