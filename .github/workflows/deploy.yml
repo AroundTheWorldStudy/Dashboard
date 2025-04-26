@@ -12,17 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+          package: .                  # just your source (package.json, .next/, public/, etc.)
+          enable-oryx-build: true     # ← tells Kudu to npm install & build on the server
           clean: true
+        env:
+          SCM_DO_BUILD_DURING_DEPLOYMENT: true
     
