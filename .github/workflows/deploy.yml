@@ -12,28 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
+          cache: 'npm'
 
-      # Install pnpm itself
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.9.0  
-          run_install: false
-
-      # Install dependencies and build
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
-
-      - name: 'Deploy to Azure WebApp'
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
-        with: 
+        with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
-          clean: true     
-      
-      # Debug
-      - name: Show artifact files
-        run: ls -R . 
+          clean: true
+    
