@@ -2,7 +2,7 @@ name: deploy-to-azure
 
 on:
   push:
-    branches: [ master ] 
+    branches: [ main ] 
   workflow_dispatch: 
 
 jobs:
@@ -14,26 +14,32 @@ jobs:
       NEXTAUTH_URL: ${{ secrets.APP_URL }}
 
     steps:
-      # 1 Checkout
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm' 
+          cache: 'pnpm'
 
-      - run: corepack enable
+      # Install pnpm itself
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest  
+          run_install: false
+
+      # Install dependencies and build
       - run: pnpm install --frozen-lockfile
       - run: pnpm dlx prisma generate
       - run: pnpm run build
 
+      # Authenticate to Azure
       - name: Azure Login
         uses: azure/login@v2
         with:
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} :contentReference[oaicite:6]{index=6}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}   # e.g. t3-demo-api
-          package: .                                   # repo root; action zips it for you
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          package: .            
