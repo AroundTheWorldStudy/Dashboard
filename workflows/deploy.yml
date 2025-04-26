@@ -1,0 +1,41 @@
+name: CI-CD-to-Azure
+
+on:
+  push:
+    branches: [ master ]   # adjust if your default branch is “main”
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:                     # runtime secrets your app expects
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      NEXTAUTH_URL: ${{ secrets.APP_URL }}
+
+    steps:
+      # 1 Checkout
+      - uses: actions/checkout@v4
+
+      # 2 Node + cache
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # 3 Install / build locally (catches errors early)
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npm run build
+
+      # 4 Log in to Azure with the publish profile
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+      # 5 Deploy
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}   # e.g. t3-demo-api
+          package: .                                   # repo root; action zips it for you
