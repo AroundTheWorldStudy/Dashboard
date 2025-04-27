@@ -15,8 +15,6 @@ const languages = [
   { value: "zh", label: "中文" },
   { value: "hi", label: "हिन्दी" },
   { value: "ar", label: "العربية" },
-  { value: "sw", label: "Kiswahili" },
-  { value: "bn", label: "বাংলা" },
 ]
 
 export function LanguageSwitcher({ currentLang }: { currentLang: string }) {

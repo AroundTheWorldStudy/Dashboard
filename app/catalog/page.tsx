@@ -19,10 +19,10 @@ export default function CatalogPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar currentLang={lang} />
-      <div className="bg-gradient-to-b from-primary/5 to-transparent py-8">
+      <div className="bg-gradient-to-b from-primary/5 to-transparent py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-heading font-semibold mb-2">{t("videos")}</h1>
-          <p className="text-muted-foreground">Explore our educational content designed for global learning</p>
+          <h1 className="text-4xl font-heading font-semibold mb-3">{t("videos")}</h1>
+          <p className="text-muted-foreground text-lg">Explore our educational content designed for global learning</p>
         </div>
       </div>
       <main className="flex-1 container mx-auto py-8 px-4">

@@ -133,22 +133,6 @@ const languages = [
     searchText: "ابحث عن لغة...",
     noLanguageFound: "لم يتم العثور على لغة.",
   },
-  {
-    value: "sw",
-    label: "Kiswahili",
-    regions: ["KE", "TZ", "UG", "RW", "BI", "CD", "SS", "SO", "MZ", "ZM", "MW"],
-    selectText: "Chagua lugha",
-    searchText: "Tafuta lugha...",
-    noLanguageFound: "Hakuna lugha iliyopatikana.",
-  },
-  {
-    value: "bn",
-    label: "বাংলা",
-    regions: ["BD", "IN"],
-    selectText: "ভাষা নির্বাচন করুন",
-    searchText: "ভাষা অনুসন্ধান করুন...",
-    noLanguageFound: "কোন ভাষা পাওয়া যায়নি।",
-  },
 ]
 
 // Map country codes to languages

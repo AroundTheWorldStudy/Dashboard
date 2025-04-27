@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { useTranslation } from "@/lib/translations"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useParams, useSearchParams } from "next/navigation"
 
 // Sample video data - in a real app, this would come from an API
@@ -13,7 +13,7 @@ const sampleVideos = [
   {
     id: "1",
     titleKey: "video1",
-    descriptionKey: "video1Description", // You'll need to add these to translations
+    descriptionKey: "video1Description",
     thumbnail: "/abstract-math-concepts.png",
     duration: "12:34",
     categoryKey: "mathematics",
@@ -54,7 +54,7 @@ const sampleVideos = [
     id: "6",
     titleKey: "video6",
     descriptionKey: "video6Description",
-    thumbnail: "/placeholder.svg?height=180&width=320&query=english class",
+    thumbnail: "/diverse-students-english-class.png",
     duration: "11:52",
     categoryKey: "languages",
   },
@@ -65,7 +65,8 @@ export default function VideoPage() {
   const searchParams = useSearchParams()
   const id = params.id as string
   const lang = searchParams.get("lang") || "en"
-  const { setLanguage, t } = useTranslation()
+  const { setLanguage, t, getVideoUrl } = useTranslation()
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     // Update the language based on URL parameter
@@ -74,6 +75,7 @@ export default function VideoPage() {
 
   // Find the video by ID
   const video = sampleVideos.find((v) => v.id === id) || sampleVideos[0]
+  const videoUrl = getVideoUrl(video.id)
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -90,31 +92,13 @@ export default function VideoPage() {
         <div className="grid gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
             <div className="relative aspect-video bg-muted rounded-lg overflow-hidden mb-6 shadow-lg">
-              {/* This would be a video player in a real app */}
-              <Image
-                src={video.thumbnail || "/placeholder.svg"}
-                alt={t(video.titleKey)}
-                fill
-                className="object-cover"
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                poster={video.thumbnail}
+                controls
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="rounded-full bg-primary/90 p-4 shadow-md hover:bg-primary transition-colors cursor-pointer">
-                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
             </div>
 
             <h1 className="text-3xl font-heading font-medium mb-4">{t(video.titleKey)}</h1>

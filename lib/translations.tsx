@@ -11,6 +11,15 @@ export const translations = {
     backToCatalog: "Back to catalog",
     watchNow: "Watch Now",
     duration: "Duration",
+    uploadVideo: "Upload Video",
+    uploadDescription: "Upload a video to translate",
+    selectFile: "Select File",
+    uploading: "Uploading...",
+    processing: "Processing...",
+    uploadSuccess: "Upload successful!",
+    uploadError: "Upload failed",
+    dragDrop: "Drag and drop file here or click to browse",
+    generateTranslation: "Generate Translation",
     // Video titles
     video1: "Introduction to Mathematics",
     video2: "Basic Physics Concepts",
@@ -47,6 +56,15 @@ export const translations = {
     backToCatalog: "Volver al catálogo",
     watchNow: "Ver ahora",
     duration: "Duración",
+    uploadVideo: "Subir Video",
+    uploadDescription: "Sube un video para traducir",
+    selectFile: "Seleccionar Archivo",
+    uploading: "Subiendo...",
+    processing: "Procesando...",
+    uploadSuccess: "¡Subida exitosa!",
+    uploadError: "Error al subir",
+    dragDrop: "Arrastra y suelta el archivo aquí o haz clic para navegar",
+    generateTranslation: "Generar Traducción",
     // Video titles
     video1: "Introducción a las Matemáticas",
     video2: "Conceptos Básicos de Física",
@@ -83,6 +101,15 @@ export const translations = {
     backToCatalog: "Retour au catalogue",
     watchNow: "Regarder maintenant",
     duration: "Durée",
+    uploadVideo: "Télécharger une Vidéo",
+    uploadDescription: "Téléchargez une vidéo à traduire",
+    selectFile: "Sélectionner un Fichier",
+    uploading: "Téléchargement...",
+    processing: "Traitement...",
+    uploadSuccess: "Téléchargement réussi !",
+    uploadError: "Échec du téléchargement",
+    dragDrop: "Glissez et déposez le fichier ici ou cliquez pour parcourir",
+    generateTranslation: "Générer une Traduction",
     // Video titles
     video1: "Introduction aux Mathématiques",
     video2: "Concepts Fondamentaux de Physique",
@@ -119,6 +146,15 @@ export const translations = {
     backToCatalog: "Zurück zum Katalog",
     watchNow: "Jetzt ansehen",
     duration: "Dauer",
+    uploadVideo: "Video hochladen",
+    uploadDescription: "Laden Sie ein Video zum Übersetzen hoch",
+    selectFile: "Datei auswählen",
+    uploading: "Wird hochgeladen...",
+    processing: "Wird verarbeitet...",
+    uploadSuccess: "Upload erfolgreich!",
+    uploadError: "Upload fehlgeschlagen",
+    dragDrop: "Datei hier ablegen oder klicken zum Durchsuchen",
+    generateTranslation: "Übersetzung generieren",
     // Video titles
     video1: "Einführung in die Mathematik",
     video2: "Grundlegende physikalische Konzepte",
@@ -142,6 +178,15 @@ export const translations = {
     backToCatalog: "Voltar ao catálogo",
     watchNow: "Assistir agora",
     duration: "Duração",
+    uploadVideo: "Carregar Vídeo",
+    uploadDescription: "Carregue um vídeo para traduzir",
+    selectFile: "Selecionar Arquivo",
+    uploading: "Carregando...",
+    processing: "Processando...",
+    uploadSuccess: "Carregamento bem-sucedido!",
+    uploadError: "Falha no carregamento",
+    dragDrop: "Arraste e solte o arquivo aqui ou clique para navegar",
+    generateTranslation: "Gerar Tradução",
     // Video titles
     video1: "Introdução à Matemática",
     video2: "Conceitos Básicos de Física",
@@ -165,6 +210,15 @@ export const translations = {
     backToCatalog: "返回目录",
     watchNow: "立即观看",
     duration: "时长",
+    uploadVideo: "上传视频",
+    uploadDescription: "上传视频进行翻译",
+    selectFile: "选择文件",
+    uploading: "上传中...",
+    processing: "处理中...",
+    uploadSuccess: "上传成功！",
+    uploadError: "上传失败",
+    dragDrop: "将文件拖放到此处或点击浏览",
+    generateTranslation: "生成翻译",
     // Video titles
     video1: "数学导论",
     video2: "基本物理概念",
@@ -188,6 +242,15 @@ export const translations = {
     backToCatalog: "कैटलॉग पर वापस जाएं",
     watchNow: "अभी देखें",
     duration: "अवधि",
+    uploadVideo: "वीडियो अपलोड करें",
+    uploadDescription: "अनुवाद के लिए वीडियो अपलोड करें",
+    selectFile: "फ़ाइल चुनें",
+    uploading: "अपलोड हो रहा है...",
+    processing: "प्रोसेसिंग हो रही है...",
+    uploadSuccess: "अपलोड सफल!",
+    uploadError: "अपलोड विफल",
+    dragDrop: "फ़ाइल को यहां खींचें और छोड़ें या ब्राउज़ करने के लिए क्लिक करें",
+    generateTranslation: "अनुवाद उत्पन्न करें",
     // Video titles
     video1: "गणित का परिचय",
     video2: "मूल भौतिकी अवधारणाएँ",
@@ -211,6 +274,15 @@ export const translations = {
     backToCatalog: "العودة إلى الفهرس",
     watchNow: "شاهد الآن",
     duration: "المدة",
+    uploadVideo: "تحميل فيديو",
+    uploadDescription: "قم بتحميل فيديو للترجمة",
+    selectFile: "اختر ملف",
+    uploading: "جاري التحميل...",
+    processing: "جاري المعالجة...",
+    uploadSuccess: "تم التحميل بنجاح!",
+    uploadError: "فشل التحميل",
+    dragDrop: "اسحب وأفلت الملف هنا أو انقر للتصفح",
+    generateTranslation: "إنشاء ترجمة",
     // Video titles
     video1: "مقدمة في الرياضيات",
     video2: "مفاهيم الفيزياء الأساسية",
@@ -226,52 +298,18 @@ export const translations = {
     chemistry: "الكيمياء",
     languages: "اللغات",
   },
-  sw: {
-    videos: "Video za Elimu",
-    categories: "Jamii",
-    all: "Zote",
-    relatedVideos: "Video zinazohusiana",
-    backToCatalog: "Rudi kwenye katalogi",
-    watchNow: "Tazama sasa",
-    duration: "Muda",
-    // Video titles
-    video1: "Utangulizi wa Hisabati",
-    video2: "Dhana za Msingi za Fizikia",
-    video3: "Historia ya Dunia: Ustaarabu wa Kale",
-    video4: "Utangulizi wa Biolojia",
-    video5: "Misingi ya Kemia",
-    video6: "Kujifunza Sarufi ya Kiingereza",
-    // Categories
-    mathematics: "Hisabati",
-    physics: "Fizikia",
-    history: "Historia",
-    biology: "Biolojia",
-    chemistry: "Kemia",
-    languages: "Lugha",
-  },
-  bn: {
-    videos: "শিক্ষামূলক ভিডিও",
-    categories: "বিভাগ",
-    all: "সব",
-    relatedVideos: "সম্পর্কিত ভিডিও",
-    backToCatalog: "ক্যাটালগে ফিরে যান",
-    watchNow: "এখন দেখুন",
-    duration: "সময়কাল",
-    // Video titles
-    video1: "গণিতের ভূমিকা",
-    video2: "বেসিক ফিজিক্স ধারণা",
-    video3: "বিশ্ব ইতিহাস: প্রাচীন সভ্যতা",
-    video4: "জীববিজ্ঞান ভূমিকা",
-    video5: "রসায়ন বিজ্ঞান মৌলিক বিষয়",
-    video6: "ইংরেজি ব্যাকরণ শেখা",
-    // Categories
-    mathematics: "গণিত",
-    physics: "পদার্থবিদ্যা",
-    history: "ইতিহাস",
-    biology: "জীববিজ্ঞান",
-    chemistry: "রসায়ন",
-    languages: "ভাষা",
-  },
+}
+
+// Language code mapping for video files
+export const languageCodeMapping = {
+  en: "en-US",
+  es: "es-US",
+  fr: "fr-FR",
+  de: "nl-NL",
+  pt: "pt-BR",
+  zh: "cmn-CN",
+  hi: "hi-IN",
+  ar: "ar-XA",
 }
 
 type TranslationKey = keyof typeof translations.en
@@ -281,6 +319,7 @@ interface TranslationContextType {
   language: LanguageCode
   setLanguage: (lang: string) => void
   t: (key: TranslationKey) => string
+  getVideoUrl: (videoId: string) => string
 }
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined)
@@ -307,7 +346,16 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
     return translations[language]?.[key] || translations.en[key]
   }
 
-  return <TranslationContext.Provider value={{ language, setLanguage, t }}>{children}</TranslationContext.Provider>
+  const getVideoUrl = (videoId: string): string => {
+    const langCode = languageCodeMapping[language] || "en-US"
+    return `https://storage.googleapis.com/aroundtheworldstudy/${videoId}/${langCode}_output.mp4`
+  }
+
+  return (
+    <TranslationContext.Provider value={{ language, setLanguage, t, getVideoUrl }}>
+      {children}
+    </TranslationContext.Provider>
+  )
 }
 
 export function useTranslation() {

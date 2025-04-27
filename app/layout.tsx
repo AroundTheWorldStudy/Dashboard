@@ -16,6 +16,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Around The World Study",
   description: "Educational content for underserved communities and cultures",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
