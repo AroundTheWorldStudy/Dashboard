@@ -16,19 +16,6 @@ interface FileUploaderProps {
   className?: string
 }
 
-// Direct upload function to Google Cloud Storage
-async function directUpload(file: File) {
-  await fetch(`https://storage.googleapis.com/aroundtheworldstudy/${file.name}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": file.type,
-    },
-    body: file,
-  })
-
-  return `https://storage.googleapis.com/aroundtheworldstudy/${file.name}`
-}
-
 export function FileUploader({ onUploadComplete, className }: FileUploaderProps) {
   const [file, setFile] = useState<File | null>(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -126,6 +113,63 @@ export function FileUploader({ onUploadComplete, className }: FileUploaderProps)
     }
   }
 
+  const handleUpload = async () => {
+    if (!file) return
+
+    setIsUploading(true)
+    setUploadProgress(0)
+    setError(null)
+
+    try {
+      // Create a FormData object to send the file
+      const formData = new FormData()
+      formData.append("file", file)
+
+      // Set up progress simulation since fetch doesn't support progress tracking
+      const progressInterval = setInterval(() => {
+        setUploadProgress((prev) => {
+          const increment = Math.random() * 10
+          const newProgress = prev + increment
+          if (newProgress >= 95) {
+            clearInterval(progressInterval)
+            return 95
+          }
+          return newProgress
+        })
+      }, 300)
+
+      // Upload the file using our server-side API route
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+
+      // Clear the progress interval
+      clearInterval(progressInterval)
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Upload failed")
+      }
+
+      // Complete the progress bar
+      setUploadProgress(100)
+
+      // Short delay to show 100% completion
+      await new Promise((resolve) => setTimeout(resolve, 500))
+
+      const data = await response.json()
+
+      setIsUploading(false)
+      setSuccess(true)
+      onUploadComplete(data.url)
+    } catch (err) {
+      console.error("Upload error:", err)
+      setError(err instanceof Error ? err.message : "Upload failed. Please try again.")
+      setIsUploading(false)
+    }
+  }
+
   const handleRemoveFile = () => {
     if (videoPreview) {
       URL.revokeObjectURL(videoPreview)
@@ -155,49 +199,6 @@ export function FileUploader({ onUploadComplete, className }: FileUploaderProps)
   const resetForm = () => {
     handleRemoveFile()
     setSuccess(false)
-  }
-
-  const handleUpload = async () => {
-    if (!file) return
-
-    setIsUploading(true)
-    setUploadProgress(0)
-    setError(null)
-
-    try {
-      // Set up progress simulation
-      const progressInterval = setInterval(() => {
-        setUploadProgress((prev) => {
-          const increment = Math.random() * 10
-          const newProgress = prev + increment
-          if (newProgress >= 95) {
-            clearInterval(progressInterval)
-            return 95
-          }
-          return newProgress
-        })
-      }, 300)
-
-      // Use the direct upload function
-      const uploadedUrl = await directUpload(file)
-
-      // Complete the progress bar
-      clearInterval(progressInterval)
-      setUploadProgress(100)
-
-      // Short delay to show 100% completion
-      await new Promise((resolve) => setTimeout(resolve, 500))
-
-      // Show success immediately after upload
-      // The backend will handle processing asynchronously
-      setIsUploading(false)
-      setSuccess(true)
-      onUploadComplete(uploadedUrl)
-    } catch (err) {
-      console.error("Upload error:", err)
-      setError("Failed to upload video. Please try again.")
-      setIsUploading(false)
-    }
   }
 
   return (
